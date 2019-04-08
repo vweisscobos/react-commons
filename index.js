@@ -286,9 +286,6 @@ SelectInput.propTypes = {
   options: PropTypes.arrayOf(PropTypes.object)
 };
 
-export default SelectInput;
-
-
 const TYPING_DELAY = 300;
 let lastChange = Date.now();
 let searchSchedule = null;
@@ -398,8 +395,6 @@ SmartAutoComplete.propTypes = {
   search: PropTypes.func
 };
 
-export default SmartAutoComplete;
-
 const Table = ({data, labels, attributesMap, onRowClick, selectedRow}) => {
   if (labels.length !== attributesMap.length) {
     throw new Error('Invalid number of labels/attributes');
@@ -434,8 +429,6 @@ const Table = ({data, labels, attributesMap, onRowClick, selectedRow}) => {
   </div>;
 };
 
-export default Table;
-
 const TableRow = ({obj, attributes, onRowClick, selectedRow, index}) => {
   return <tr
     onClick={onRowClick}
@@ -448,8 +441,6 @@ const TableRow = ({obj, attributes, onRowClick, selectedRow, index}) => {
     }
   </tr>;
 };
-
-export default TableRow;
 
 const TextInput = ({name, label, onChange, placeholder, value, error}) => {
   let wrapperClass = 'ga-form-group';
@@ -483,8 +474,6 @@ TextInput.propTypes = {
   error: PropTypes.string
 };
 
-export default TextInput;
-
 const DateInput = ({name, label, onChange, placeholder, value, error}) => {
   let wrapperClass = 'ga-form-group';
   if (error && error.length > 0) {
@@ -517,7 +506,16 @@ DateInput.propTypes = {
   error: PropTypes.string
 };
 
-export default DumbAutocomplete;
-export default DateInput;
-export default MaskedNumberInput;
-export default NumberInput;
+export {
+  DumbAutocomplete,
+  DateInput,
+  MaskedNumberInput,
+  NumberInput,
+  SearchField,
+  SelectInput,
+  SmartAutoComplete,
+  Table,
+  TableRow,
+  TextInput
+};
+
