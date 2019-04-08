@@ -1,0 +1,5 @@
+# webstorm config
+.idea/
+
+# packages
+/node_packages
