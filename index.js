@@ -205,48 +205,6 @@ const SearchField = ({placeholder, label, name, search, onResponse}) => {
   </div>;
 };
 
-export default SearchField;
-
-const Section = ({title, path, subsections, location}) => {
-  let activePath = location.split('/');
-
-  activePath = activePath[activePath.length - 1];
-
-  return <section className={'ga-section'}>
-    <h1>{title}</h1>
-    <nav className={'ga-section__navigation'}>
-      {
-        subsections.map((subsection, index) => {
-          return <div
-            key={index}
-            className={`ga-section__navigation__link ${(subsection.path === activePath ? 'ga-section__navigation__link-active' : '')}`}
-          >
-            <Link to={`/${path}/` + subsection.path}>{subsection.label}</Link>
-          </div>;
-        })
-      }
-    </nav>
-    <div className={'ga-section__subsection'}>
-      {
-        subsections.map((subsection, index) => {
-          return <Route
-            key={index}
-            path={`/${path}/` + subsection.path}
-            component={subsection.component}/>;
-        })
-      }
-    </div>
-  </section>;
-};
-
-Section.propTypes = {
-  paths: PropTypes.array,
-  components: PropTypes.array
-};
-
-export default Section;
-
-
 const SelectInput = ({ name, label, onChange, options, value, defaultOption, error}) => {
   return (
     <div className={'ga-form-group'}>
