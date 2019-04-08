@@ -126,11 +126,9 @@ MaskedNumberInput.propTypes = {
   error: PropTypes.string
 };
 
-
-
-import React from 'react';
-import PropTypes from 'prop-types';
-
+/*
+ * Input for pure numbers
+ */
 const NumberInput = ({name, label, onChange, placeholder, value, error, min, max, step, disabled}) => {
   let wrapperClass='ga-form-group';
   if (error && error.length > 0) {
@@ -209,10 +207,6 @@ const SearchField = ({placeholder, label, name, search, onResponse}) => {
 
 export default SearchField;
 
-import React from 'react';
-import { Route, Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
-
 const Section = ({title, path, subsections, location}) => {
   let activePath = location.split('/');
 
@@ -252,8 +246,6 @@ Section.propTypes = {
 
 export default Section;
 
-import React from 'react';
-import PropTypes from 'prop-types';
 
 const SelectInput = ({ name, label, onChange, options, value, defaultOption, error}) => {
   return (
@@ -296,9 +288,6 @@ SelectInput.propTypes = {
 
 export default SelectInput;
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import DumbAutocomplete from './DumbAutocomplete';
 
 const TYPING_DELAY = 300;
 let lastChange = Date.now();
@@ -411,9 +400,6 @@ SmartAutoComplete.propTypes = {
 
 export default SmartAutoComplete;
 
-import React from 'react';
-import TableRow from './TableRow';
-
 const Table = ({data, labels, attributesMap, onRowClick, selectedRow}) => {
   if (labels.length !== attributesMap.length) {
     throw new Error('Invalid number of labels/attributes');
@@ -450,8 +436,6 @@ const Table = ({data, labels, attributesMap, onRowClick, selectedRow}) => {
 
 export default Table;
 
-import React from 'react';
-
 const TableRow = ({obj, attributes, onRowClick, selectedRow, index}) => {
   return <tr
     onClick={onRowClick}
@@ -466,9 +450,6 @@ const TableRow = ({obj, attributes, onRowClick, selectedRow, index}) => {
 };
 
 export default TableRow;
-
-import React from 'react';
-import PropTypes from 'prop-types';
 
 const TextInput = ({name, label, onChange, placeholder, value, error}) => {
   let wrapperClass = 'ga-form-group';
@@ -503,9 +484,6 @@ TextInput.propTypes = {
 };
 
 export default TextInput;
-
-import React from 'react';
-import PropTypes from 'prop-types';
 
 const DateInput = ({name, label, onChange, placeholder, value, error}) => {
   let wrapperClass = 'ga-form-group';
@@ -542,3 +520,4 @@ DateInput.propTypes = {
 export default DumbAutocomplete;
 export default DateInput;
 export default MaskedNumberInput;
+export default NumberInput;
