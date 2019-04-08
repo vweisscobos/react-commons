@@ -17,18 +17,18 @@ const DumbAutocomplete = ({onChange, placeholder, onSelect, value, data, name, l
   };
 
   return <div
-    className={'ga-autocomplete ga-form-group'}
+    className={'rc-autocomplete rc-form-group'}
   >
     <label htmlFor={name}>{label}</label>
     <input
       name={name}
-      className={'ga-form-control ga-autocomplete__input'}
+      className={'rc-form-control rc-autocomplete__input'}
       onChange={onChange}
       value={value}
       placeholder={placeholder}
     />
     <table
-      className={'ga-autocomplete__list'}
+      className={'rc-autocomplete__list'}
       style={{
         visibility: testSearchMatch() || value.trim() === '' ? 'hidden' : 'visible'
       }}
@@ -179,7 +179,7 @@ SmartAutoComplete.propTypes = {
  * mask: string with a 'd' where it should be a number. Ex: (dd) ddddd dddd or ddd.ddd.ddd-dd
  */
 const MaskedNumberInput = ({name, label, onChange, placeholder, value, mask, error}) => {
-  let wrapperClass = 'ga-form-group';
+  let wrapperClass = 'rc-form-group';
   let formatted  = '';
   let lastReplaced = 0;
   let maxLength = mask.match(/d/g).length;
@@ -219,11 +219,11 @@ const MaskedNumberInput = ({name, label, onChange, placeholder, value, mask, err
 
   return <div className={wrapperClass}>
     <label htmlFor={name}>{label}</label>
-    <div className={'ga-form-field'}>
+    <div className={'rc-form-field'}>
       <input
         type={'text'}
         name={name}
-        className={'ga-form-control'}
+        className={'rc-form-control'}
         placeholder={placeholder}
         value={formatted}
         onKeyUp={onKeyup}
@@ -247,7 +247,7 @@ MaskedNumberInput.propTypes = {
  * Input for pure numbers
  */
 const NumberInput = ({name, label, onChange, placeholder, value, error, min, max, step, disabled}) => {
-  let wrapperClass='ga-form-group';
+  let wrapperClass='rc-form-group';
   if (error && error.length > 0) {
     wrapperClass += ' has-error';
   }
@@ -255,11 +255,11 @@ const NumberInput = ({name, label, onChange, placeholder, value, error, min, max
   return (
     <div className={wrapperClass}>
       <label htmlFor={name}>{label}</label>
-      <div className={'ga-form-field'}>
+      <div className={'rc-form-field'}>
         <input
           type={'number'}
           name={name}
-          className={'ga-form-control'}
+          className={'rc-form-control'}
           placeholder={placeholder}
           value={value}
           min={min + ''}
@@ -318,11 +318,11 @@ const SearchField = ({placeholder, label, name, search, onResponse}) => {
       );
   };
 
-  return <div className={'ga-form-group'}>
+  return <div className={'rc-form-group'}>
     <label htmlFor={name}>{label}</label>
     <input
       placeholder={placeholder}
-      className={'ga-form-control'}
+      className={'rc-form-control'}
       type={'text'}
       onChange={onValueChange}
     />
@@ -334,11 +334,11 @@ const SearchField = ({placeholder, label, name, search, onResponse}) => {
  */
 const SelectInput = ({ name, label, onChange, options, value, defaultOption, error}) => {
   return (
-    <div className={'ga-form-group'}>
+    <div className={'rc-form-group'}>
       <label htmlFor={name}>{label}</label>
-      <div className={'ga-form-field'}>
+      <div className={'rc-form-field'}>
         <select
-          className={'ga-form-control'}
+          className={'rc-form-control'}
           name={name}
           value={value}
           onChange={onChange}
@@ -382,10 +382,10 @@ const Table = ({data, labels, attributesMap, onRowClick, selectedRow}) => {
     throw new Error('Invalid number of labels/attributes');
   }
 
-  return <div className={'ga-table-wrapper'}>
-    <table className={'ga-table'}>
-      <thead className={'ga-table__header'}>
-      <tr className={'ga-table__row'}>
+  return <div className={'rc-table-wrapper'}>
+    <table className={'rc-table'}>
+      <thead className={'rc-table__header'}>
+      <tr className={'rc-table__row'}>
         {
           labels.map((label, index) => {
             return <th key={index}>{label}</th>;
@@ -393,7 +393,7 @@ const Table = ({data, labels, attributesMap, onRowClick, selectedRow}) => {
         }
       </tr>
       </thead>
-      <tbody className={'ga-table__body'}>
+      <tbody className={'rc-table__body'}>
       {
         data.map((row, index) => {
           return <TableRow
@@ -418,7 +418,7 @@ const Table = ({data, labels, attributesMap, onRowClick, selectedRow}) => {
 const TableRow = ({obj, attributes, onRowClick, selectedRow, index}) => {
   return <tr
     onClick={onRowClick}
-    className={'ga-table__row' + (selectedRow === index ? ' ga-table__row-selected' : '')}
+    className={'rc-table__row' + (selectedRow === index ? ' rc-table__row-selected' : '')}
   >
     {
       attributes.map((attr, index) => {
@@ -432,7 +432,7 @@ const TableRow = ({obj, attributes, onRowClick, selectedRow, index}) => {
  * Simple text input
  */
 const TextInput = ({name, label, onChange, placeholder, value, error}) => {
-  let wrapperClass = 'ga-form-group';
+  let wrapperClass = 'rc-form-group';
   if (error && error.length > 0) {
     wrapperClass += ' has-error';
   }
@@ -440,11 +440,11 @@ const TextInput = ({name, label, onChange, placeholder, value, error}) => {
   return (
     <div className={wrapperClass}>
       <label htmlFor={name}>{label}</label>
-      <div className={'ga-form-field'}>
+      <div className={'rc-form-field'}>
         <input
           type={'text'}
           name={name}
-          className={'ga-form-control'}
+          className={'rc-form-control'}
           placeholder={placeholder}
           value={value}
           onChange={onChange} />
@@ -467,7 +467,7 @@ TextInput.propTypes = {
  * Simple date input
  */
 const DateInput = ({name, label, onChange, placeholder, value, error}) => {
-  let wrapperClass = 'ga-form-group';
+  let wrapperClass = 'rc-form-group';
   if (error && error.length > 0) {
     wrapperClass += ' has-error';
   }
@@ -475,11 +475,11 @@ const DateInput = ({name, label, onChange, placeholder, value, error}) => {
   return (
     <div className={wrapperClass}>
       <label htmlFor={name}>{label}</label>
-      <div className={'ga-form-field'}>
+      <div className={'rc-form-field'}>
         <input
           type={'time'}
           name={name}
-          className={'ga-form-control'}
+          className={'rc-form-control'}
           placeholder={placeholder}
           value={value}
           onChange={onChange} />
