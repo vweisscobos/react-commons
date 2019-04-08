@@ -57,6 +57,123 @@ DumbAutocomplete.propTypes = {
   label: PropTypes.string
 };
 
+const TYPING_DELAY = 300;
+let lastChange = Date.now();
+let searchSchedule = null;
+
+/*
+ * SmartAutoComplete receives a search function as argument. This function must receive a string as argument and
+ * return a promise that resolves into an array. This array is then mapped using the toString function.
+ * The suspended list is then populated with the returned value. When the list have just one element and its value
+ * its equal to the value in the search field, the returnValue function its called with the object represented by the
+ * string as an argument.
+ */
+class SmartAutoComplete extends React.Component {
+
+  constructor() {
+    super();
+
+    this.state = {
+      searchedTerm: '',
+      searchResults: [],
+      readyToSend: null
+    };
+
+    this.onSearchChange = this.onSearchChange.bind(this);
+    this.scheduleSearch = this.scheduleSearch.bind(this);
+    this.onItemSelect = this.onItemSelect.bind(this);
+    this.callSearch = this.callSearch.bind(this);
+    this.updateResults = this.updateResults.bind(this);
+    this.updateSearch = this.updateSearch.bind(this);
+  }
+
+  updateSearch(value) {
+    this.setState({
+      searchedTerm: value
+    }, this.scheduleSearch);
+  }
+
+  onSearchChange(evt) {
+    this.updateSearch(evt.target.value);
+  }
+
+  onItemSelect(index) {
+    let newSearchedValue = this.state.searchResults[index];
+
+    this.updateSearch(this.props.toString(newSearchedValue));
+  }
+
+  scheduleSearch() {
+    if (this.state.searchedTerm.length === 1) {
+      lastChange = Date.now();
+      return;
+    }
+
+    if (lastChange - Date.now() < TYPING_DELAY) {
+      clearTimeout(searchSchedule);
+    }
+
+    searchSchedule = setTimeout(this.callSearch);
+    lastChange = Date.now();
+  }
+
+  callSearch() {
+    this.props.search(this.state.searchedTerm)
+      .then(this.updateResults)
+      .catch(console.log);
+  }
+
+  updateResults(results) {
+    if (this.state.searchedTerm.trim() === '') {
+      results = [];
+    }
+
+    this.setState({
+      searchResults: results
+    }, () => {
+      if (this.state.searchResults.length === 1 &&
+        this.props.toString(this.state.searchResults[0]) === this.state.searchedTerm) {
+        this.props.returnValue(this.state.searchResults[0]);
+      } else {
+        this.props.returnValue(null);
+      }
+    });
+  }
+
+  render() {
+    const {
+      name,
+      label,
+      placeholder,
+      toString
+    } = this.props;
+
+    const {
+      searchedTerm,
+      searchResults
+    } = this.state;
+
+    return <DumbAutocomplete
+      onChange={this.onSearchChange}
+      placeholder={placeholder}
+      onSelect={this.onItemSelect}
+      value={searchedTerm}
+      data={searchResults.map(toString)}
+      name={name}
+      label={label}
+    />;
+  }
+}
+
+SmartAutoComplete.propTypes = {
+  name: PropTypes.string,
+  label: PropTypes.string,
+  placeholder: PropTypes.string,
+  toString: PropTypes.func,
+  returnValue: PropTypes.func,
+  search: PropTypes.func
+};
+
 /*
  * Input number that receives a mask for formatted doc number of phone number
  * mask: string with a 'd' where it should be a number. Ex: (dd) ddddd dddd or ddd.ddd.ddd-dd
@@ -168,6 +285,13 @@ NumberInput.propTypes = {
   error: PropTypes.string
 };
 
+/*
+ * The search field component call a function every time the input changes. If the delay between changes
+ * are minor than 500ms, just the last change calls the function. It avoid call to many times the same function.
+ * The component receives the search and onResponse functions. Search function must receive a string as argument
+ * and its called every time the value changes. onResponse its called when search functions resolves. It is called
+ * with the search function result as an argument.
+ */
 const SearchField = ({placeholder, label, name, search, onResponse}) => {
   const TYPING_DELAY = 500;
   let lastChange = Date.now();
@@ -205,6 +329,9 @@ const SearchField = ({placeholder, label, name, search, onResponse}) => {
   </div>;
 };
 
+/*
+ * Simple select input component
+ */
 const SelectInput = ({ name, label, onChange, options, value, defaultOption, error}) => {
   return (
     <div className={'ga-form-group'}>
@@ -244,115 +371,12 @@ SelectInput.propTypes = {
   options: PropTypes.arrayOf(PropTypes.object)
 };
 
-const TYPING_DELAY = 300;
-let lastChange = Date.now();
-let searchSchedule = null;
-
-class SmartAutoComplete extends React.Component {
-  constructor() {
-    super();
-
-    this.state = {
-      searchedTerm: '',
-      searchResults: [],
-      readyToSend: null
-    };
-
-    this.onSearchChange = this.onSearchChange.bind(this);
-    this.scheduleSearch = this.scheduleSearch.bind(this);
-    this.onItemSelect = this.onItemSelect.bind(this);
-    this.callSearch = this.callSearch.bind(this);
-    this.updateResults = this.updateResults.bind(this);
-    this.updateSearch = this.updateSearch.bind(this);
-  }
-
-  updateSearch(value) {
-    this.setState({
-      searchedTerm: value
-    }, this.scheduleSearch);
-  }
-
-  onSearchChange(evt) {
-    this.updateSearch(evt.target.value);
-  }
-
-  onItemSelect(index) {
-    let newSearchedValue = this.state.searchResults[index];
-
-    this.updateSearch(this.props.toString(newSearchedValue));
-  }
-
-  scheduleSearch() {
-    if (this.state.searchedTerm.length === 1) {
-      lastChange = Date.now();
-      return;
-    }
-
-    if (lastChange - Date.now() < TYPING_DELAY) {
-      clearTimeout(searchSchedule);
-    }
-
-    searchSchedule = setTimeout(this.callSearch);
-    lastChange = Date.now();
-  }
-
-  callSearch() {
-    this.props.search(this.state.searchedTerm)
-      .then(this.updateResults)
-      .catch(console.log);
-  }
-
-  updateResults(results) {
-    if (this.state.searchedTerm.trim() === '') {
-      results = [];
-    }
-
-    this.setState({
-      searchResults: results
-    }, () => {
-      if (this.state.searchResults.length === 1 &&
-        this.props.toString(this.state.searchResults[0]) === this.state.searchedTerm) {
-        this.props.returnValue(this.state.searchResults[0]);
-      } else {
-        this.props.returnValue(null);
-      }
-    });
-  }
-
-  render() {
-    const {
-      name,
-      label,
-      placeholder,
-      toString
-    } = this.props;
-
-    const {
-      searchedTerm,
-      searchResults
-    } = this.state;
-
-    return <DumbAutocomplete
-      onChange={this.onSearchChange}
-      placeholder={placeholder}
-      onSelect={this.onItemSelect}
-      value={searchedTerm}
-      data={searchResults.map(toString)}
-      name={name}
-      label={label}
-    />;
-  }
-}
-
-SmartAutoComplete.propTypes = {
-  name: PropTypes.string,
-  label: PropTypes.string,
-  placeholder: PropTypes.string,
-  toString: PropTypes.func,
-  returnValue: PropTypes.func,
-  search: PropTypes.func
-};
-
+/*
+ * Table must receive three arrays. The data array must contain the data that will populate the table, the labels array
+ * contains the labels of each column of the table and the attributesMap array contains the attribute names of the
+ * object fields that should be displayed in the table. Note that the labels should appear in the same order of
+ * attributesMap.
+ */
 const Table = ({data, labels, attributesMap, onRowClick, selectedRow}) => {
   if (labels.length !== attributesMap.length) {
     throw new Error('Invalid number of labels/attributes');
@@ -387,6 +411,10 @@ const Table = ({data, labels, attributesMap, onRowClick, selectedRow}) => {
   </div>;
 };
 
+/*
+ * Table row receives an object containing the data that should be displayed and an attributes array with the fields
+ * that will fill the table row;
+ */
 const TableRow = ({obj, attributes, onRowClick, selectedRow, index}) => {
   return <tr
     onClick={onRowClick}
@@ -400,6 +428,9 @@ const TableRow = ({obj, attributes, onRowClick, selectedRow, index}) => {
   </tr>;
 };
 
+/*
+ * Simple text input
+ */
 const TextInput = ({name, label, onChange, placeholder, value, error}) => {
   let wrapperClass = 'ga-form-group';
   if (error && error.length > 0) {
@@ -432,6 +463,9 @@ TextInput.propTypes = {
   error: PropTypes.string
 };
 
+/*
+ * Simple date input
+ */
 const DateInput = ({name, label, onChange, placeholder, value, error}) => {
   let wrapperClass = 'ga-form-group';
   if (error && error.length > 0) {
