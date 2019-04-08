@@ -170,62 +170,6 @@ NumberInput.propTypes = {
   error: PropTypes.string
 };
 
-export default NumberInput;
-
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Route, withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
-
-const PrivateRoute = props => {
-
-  const {
-    auth,
-    component: Component,
-    path,
-    scopes
-  } = props;
-
-  return (
-    <Route
-      path={path}
-      render={props => {
-        if (!auth.isAuthenticated()) {
-          auth.login();
-        }
-
-        if (scopes.length > 0 && !auth.userHasScopes(scopes)) {
-          return <h1>
-            Unauthorized - You need the following scope(s) to view this page:{' '}
-            {scopes.join(',')}.
-          </h1>;
-        }
-
-        return <Component {...props} />;
-      }}
-    />
-  );
-};
-
-PrivateRoute.propTypes = {
-  component: PropTypes.func.isRequired,
-  scopes: PropTypes.array
-};
-
-PrivateRoute.defaultProps = {
-  scopes: []
-};
-
-function mapStateToProps(state) {
-  return {
-    auth: state.auth
-  };
-}
-
-export default withRouter(connect(mapStateToProps)(PrivateRoute));
-
-import React from 'react';
-
 const SearchField = ({placeholder, label, name, search, onResponse}) => {
   const TYPING_DELAY = 500;
   let lastChange = Date.now();
