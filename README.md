@@ -6,25 +6,62 @@ React Commons is a library of Components that are usually needed in React Applic
 
 - [Installation](#installation)
 - [Components](#components)
-  - [Date Input](#date-input)
-  - [Dumb Autocomplete](#dumb-autocomplete)
-  - [Masked Number Input](#masked-number-input)
-  - [Number Input](#number-input)
-  - [Search Field](#search-field)
-  - [Select Input](#select-input)
+  - [Autocomplete](#autocomplete)
+  - [DateInput](#date-input)
+  - [MaskedNumberInput](#masked-number-input)
+  - [NumberInput](#number-input)
+  - [SearchField](#search-field)
+  - [SelectInput](#select-input)
   - [Table](#table)
-  - [Table Row](#table-row)
-  - [Text Input](#text-input)
-  - [Time Input](#time-input)
+  - [TableRow](#table-row)
+  - [TextInput](#text-input)
+  - [TimeInput](#time-input)
 - [Complete example](#complete-example)
 
 ## Installation
 
-## Components
- 
-### Date Input
+## How to use
 
-Simple Date Input
+Import one of the available components in the top of the file and put them inside your component's render
+function.
+
+```jsx
+import react from 'react';
+import {TextInput} from 'react-commons';
+
+class SomeComponent extends React.Component {
+    render() {
+        return (
+            <div>
+                <TextInput
+                    //  props...
+                />
+            </div>
+        );
+    }
+}    
+```
+
+## Components
+
+### Autocomplete
+
+Autocomplete component that consumes a search service and displays the possible results for a given term.
+
+```jsx
+<Autocomplete
+    name={'name'}
+    label={'Label'}
+    placeholder={'Describe the search'}
+    toString={listToString} // Function use to map the received list to an array of strings.
+    returnValue={onValueMatch} // Function called when the string in the search field matches a list object.
+    search={callService} //  Function called when value change. Should receive a string as argument. 
+/>
+```
+ 
+### DateInput
+
+Simple Date Input.
 
 ```jsx
 <DateInput
@@ -32,12 +69,10 @@ Simple Date Input
     label={'Field name'}
     placeholder={'Describe what the user has to type'}
     onChange={callOnChange} //  Function to call when user type something.
-    value={fieldName} //    Value to keep in sync. Usually from a state attribute.
-    error={fieldError} //   String to warn the user of an error in validation.     
+    value={fieldName} //  Value to keep in sync. Usually from a state attribute.
+    error={fieldError} //  String to warn the user of an error in validation.     
 />
 ```
-
-Check a [Live Example](http://localhost:80).
 
 ### Table
         

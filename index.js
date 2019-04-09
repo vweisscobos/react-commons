@@ -62,13 +62,13 @@ let lastChange = Date.now();
 let searchSchedule = null;
 
 /*
- * SmartAutoComplete receives a search function as argument. This function must receive a string as argument and
+ * Autocomplete receives a search function as argument. This function must receive a string as argument and
  * return a promise that resolves into an array. This array is then mapped using the toString function.
  * The suspended list is then populated with the returned value. When the list have just one element and its value
  * its equal to the value in the search field, the returnValue function its called with the object represented by the
  * string as an argument.
  */
-class SmartAutoComplete extends React.Component {
+class Autocomplete extends React.Component {
 
   constructor() {
     super();
@@ -165,7 +165,7 @@ class SmartAutoComplete extends React.Component {
   }
 }
 
-SmartAutoComplete.propTypes = {
+Autocomplete.propTypes = {
   name: PropTypes.string,
   label: PropTypes.string,
   placeholder: PropTypes.string,
@@ -505,7 +505,7 @@ export {
   NumberInput,
   SearchField,
   SelectInput,
-  SmartAutoComplete,
+  Autocomplete,
   Table,
   TableRow,
   TextInput
