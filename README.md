@@ -5,7 +5,7 @@ React Commons is a library of Components that are usually needed in React Applic
 ## Table of content
 
 - [Installation](#installation)
-- [Components](#components)
+- [Inputs](#inputs)
   - [Date Input](#date-input)
   - [Dumb Autocomplete](#dumb-autocomplete)
   - [Masked Number Input](#masked-number-input)
@@ -21,18 +21,35 @@ React Commons is a library of Components that are usually needed in React Applic
 
 ## Components
  
-### Date Input
+### Inputs
 
-This is a simple date input component.
+All the available inputs are related in the complete example below
 
 ```jsx
-<DateInput
-    name={'date-field'}
-    label={'Date field'}
-    onChange={callOnChange}
-    value={dateField}
-    error={errors.dateField}
-/>
+import React from 'react';
+import {
+    DateInput,
+    NumberInput,
+    SelectInput,
+    TextInput,
+    TimeInput
+} from 'react-commons';
+
+class Form extends React.Components {
+    render() {
+        return (
+            <form>
+                //  name
+                //  birthday
+                //  number of fingers
+                //  race
+                //  what's time is it?
+            </form>
+        );
+    }
+}
 ```
+
+### Table
         
 
