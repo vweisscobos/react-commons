@@ -19,5 +19,9 @@
   "dependencies": {
     "prop-types": "^15.7.2",
     "react": "^16.8.6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vweisscobos/react-commons"
   }
 }
