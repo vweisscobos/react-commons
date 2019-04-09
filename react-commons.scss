@@ -1,0 +1,173 @@
+@import 'colors';
+
+.ga-table-wrapper {
+  width: 100%;
+  height: 30vh;
+  overflow: auto;
+  margin: 15px 0;
+  border: solid 1px $cinza-escuro;
+  border-radius: 7px;
+  box-sizing: border-box;
+}
+
+.ga-table {
+  width: 100%;
+}
+
+.ga-table__header {
+  text-align: left;
+}
+
+.ga-table__row {
+}
+
+.ga-table__row * {
+  padding: 2px;
+}
+
+.ga-table__row.ga-table__row-selected {
+  background-color: $cinza-medio;
+  color: black;
+}
+
+.ga-form {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  padding: 20px 20px 20px 20px;
+  position: relative;
+  background-color: $cinza-claro;
+  box-sizing: border-box;
+  border-radius: 7px;
+}
+
+.ga-form .ga-form-group {
+  margin: 15px 1% 5px 1%;
+  width: 100%;
+}
+
+.ga-form-field {
+  width: 100%;
+}
+
+.ga-form-control {
+  width: 100%;
+  padding: 5px;
+  border-radius: 3px;
+  border: solid 1px $cinza-escuro;
+  box-sizing: border-box;
+}
+
+.ga-btn {
+  border-radius: 7px;
+  background-color: $verde;
+  color: white;
+  padding: 12px;
+  margin-top: 15px;
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+  border: solid 1px $verde;
+}
+
+.ga-btn[disabled] {
+  background-color: $cinza-claro;
+  color: $cinza-medio;
+  border: solid 1px $cinza-medio;
+}
+
+.ga-form .ga-btn-submit {
+  margin: 15px 0;
+  width: 100%;
+  font-size: 16px;
+  font-weight: normal;
+}
+
+.ga-autocomplete {
+  position: relative;
+}
+
+.ga-autocomplete__list {
+  position: absolute;
+  background-color: white;
+  width: 100%;
+  padding: 0;
+  list-style: none;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.ga-autocomplete__list li {
+  padding: 2px 5px 2px 5px;
+}
+
+.ga-autocomplete__list li:first-child {
+  padding: 5px 5px 2px 5px;
+}
+
+.ga-autocomplete__list li:last-child {
+  padding: 2px 5px 5px 5px;
+}
+
+.ga-form__row button {
+  height: 28px;
+  padding: 5px;
+  box-sizing: border-box;
+  margin: 35px 0 5px 0;
+}
+
+.ga-form .ga-form {
+  padding: 0;
+}
+
+.ga-form .ga-form__row {
+  display: flex;
+  width: 100%;
+}
+
+.ga-form .ga-form__row .ga-form-group:first-child {
+  margin-left: 0;
+}
+
+.ga-form .ga-form__row .ga-form-group:last-child {
+  margin-right: 0;
+}
+
+.ga-form h2 {
+  margin: 20px 0 0 0;
+}
+
+.ga-form .alert {
+  border-radius: 3px;
+  font-size: 12px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.ga-form .alert.alert-danger {
+  background-color: #ffafa3;
+  border: solid 1px #ff605a;
+  color: #6d696a;
+  padding: 5px;
+  margin-top: 2px;
+}
+
+.ga-flex {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.ga-flex .ga-flex__column{
+  width: 100%;
+  padding: 10px;
+}
+
+.ga-flex .ga-flex__column:first-child {
+  padding-left: 0;
+}
+
+.ga-flex .ga-flex__column:last-child {
+  padding-right: 0;
+}
