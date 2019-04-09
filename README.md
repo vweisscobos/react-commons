@@ -22,8 +22,7 @@ React Commons is a library of Components that are usually needed in React Applic
 
 ## How to use
 
-Import one of the available components in the top of the file and put them inside your component's render
-function.
+Import the wanted components in the top of the file and put them inside your component's render function.
 
 ```jsx
 import react from 'react';
@@ -53,7 +52,7 @@ Autocomplete component that consumes a search service and displays the possible 
     name={'name'}
     label={'Label'}
     placeholder={'Describe the search'}
-    toString={listToString} // Function use to map the received list to an array of strings.
+    toString={listToString} // Function used to map the list from search service into an array of strings.
     returnValue={onValueMatch} // Function called when the string in the search field matches a list object.
     search={callService} //  Function called when value change. Should receive a string as argument. 
 />
