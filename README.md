@@ -22,7 +22,7 @@ React Crumbs is a library of Components that are usually needed in React Applica
 
 Install via npm.
 
-`npm install react-frags`
+`npm install react-crumbs`
 
 ## How to use
 
@@ -30,7 +30,7 @@ Import the wanted components in the top of the file and put them inside your com
 
 ```jsx
 import react from 'react';
-import {TextInput} from 'react-commons';
+import {TextInput} from 'react-crumbs';
 
 class SomeComponent extends React.Component {
     render() {
