@@ -36,10 +36,32 @@ import {
 } from 'react-commons';
 
 class Form extends React.Components {
+    constructor() {
+        super();
+        
+        this.state = {
+            name: '',
+            errors: {}
+        };
+    }
+    
+    onFormFieldChange(evt) {
+        let newState = Object.assign({}, this.state);
+        newState[evt.target.name] = evt.target.value;
+        this.setState(state);
+    }
+
     render() {
         return (
             <form>
-                //  name
+                <TextInput
+                    name={'name'}
+                    label={'Name'}
+                    placeholded={'Type your name'}
+                    onChange={this.onFormFieldChange}
+                    value={this.state.name}
+                    error={this.state.errors.name}
+                />
                 //  birthday
                 //  number of fingers
                 //  race
