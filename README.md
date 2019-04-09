@@ -6,7 +6,7 @@ React Commons is a library of Components that are usually needed in React Applic
 
 - [Installation](#installation)
 - [Components](#components)
-  -[Date Input](#date-input)
+    -[Date Input](#date-input)
   
 
 ## Installation
