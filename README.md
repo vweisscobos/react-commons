@@ -1,6 +1,7 @@
 # React Crumbs
 
-React Crumbs is a library of Components that are usually needed in React Applications. With it, you don't need to rewrite all the basics over and over again.
+React Crumbs is a library of Components that are usually needed in web applications. With it, you don't need to rewrite
+the basic every time you start a new project.
 
 ## Table of content
 
